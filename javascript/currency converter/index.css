@@ -1,0 +1,63 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    background-color: #F8D800;
+    color:black;
+    padding: 20px;
+    font-family:'Times New Roman', Times, serif;
+
+}
+.convert-box{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+input{
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+
+}
+.currency-box{
+    width: 400px;
+    display: flex;
+    gap: 10px;
+}
+select{
+    width: 180px;
+    padding: 5px;
+    border-radius: 5px;
+}
+button{
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #3498DB;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: larger;
+}
+h4{
+    font-size: larger;
+}
+
+.result-box{
+    font-size: large;
+    font-style: italic;
+}
+

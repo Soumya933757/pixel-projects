@@ -1,0 +1,28 @@
+
+.container{
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ 
+}
+
+.main-box{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+
+
+.category-box{
+    display: flex;
+    gap: 20px;
+}
+
+.news-box{
+    width: 100%;
+    display: grid;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+       <div class="main-box">
+        <h1>Password Generator</h1>
+        <div class="pass-box">
+            <div class="result-box"></div>
+            <button>Copy Password</button>
+            
+        </div>
+        <p> Use the slider and select options to lengthen your password and strengthen your security password length (6-24).</p>
+         <div class="slider-box">
+            <p>Total Characters: </p>
+            <input class="slider" type="range" min="6" max="24" default="9">
+            <p class="slider-value">9</p>
+         </div>
+        <div class="checkbox">
+            <div><input type="checkbox" id="letters" checked>
+                <label for="letters">Include Letters</label></div>
+            <div><input type="checkbox" id="numbers" checked>
+                <label for="numbers">Include Numbers</label></div>
+            <div><input type="checkbox" id="mixed" checked>
+                <label for="mixed">Include Mixed Case </label></div>
+           <div> <input type="checkbox" id="punctuation" checked>
+            <label for="punctuation">Include Punctuation</label></div>
+        </div>
+        <div class="select-box"></div>
+       </div>
+   <div class="information">
+    <div class="box">
+        <h2>Do you use any of these weak passwords?</h2>
+        <ul>
+            <li>Password</li>
+            <li>123456</li>
+            <li>Qwerty</li>
+            <li>Your name</li>
+        </ul>
+    </div>
+    <div class="box">
+        <h2>Why are those passwords weak?</h2>
+        <ul>
+            <li>They're easy to guess or crack.</li>
+            <li>If one of your logins is compromised, a hacker can access all your services.</li>
+        </ul>  
+    </div>
+   </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>

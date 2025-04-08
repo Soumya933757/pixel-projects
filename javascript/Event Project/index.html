@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container" >
+        <div class="event-box">
+            <div class="event-heading"><h1>Create An Event Invite</h1></div>
+
+            <label for="event">Event Name</label>
+            <input type="text" placeholder="Kerela js meetup" id="event">
+
+            <label for="date">Event Date</label>
+            <input type="date" id="date">
+
+            <label for="start-time">Start Time</label>
+            <input type="time" id="start-time">
+
+            <label for="end-time">End Time</label>
+            <input type="time" id="end-time">
+
+            <label for="description">Event Description</label>
+            <textarea placeholder="Brief description of the event" id="description"></textarea>
+
+            <label for="location">Event Location</label>
+            <input type="text" placeholder="Location of the event" id="location">
+
+            <button>Create Event</button>
+        </div>
+        <div class="dialog">Please fill in all fields</div>
+        <div class="card"></div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
