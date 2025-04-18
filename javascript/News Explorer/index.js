@@ -351,13 +351,140 @@ const data = [
     },
   ];
 const newsBox = document.querySelector('.news-box');
+const btn = document.querySelector('button')
+const category = document.querySelectorAll('.category')
+const search = document.querySelector('.search')
+let all = 1, business = 0, sports = 0, entertainment = 0, politics = 0;
+let newArr = [];
 document.addEventListener('DOMContentLoaded',()=>{
+ display(data);
+})
+const display = (data)=>{
+  if(newsBox.children.length>=7)return;
   for(let i=0;i<7;i++){
-   const div = document.createElement('div')
-   div.innerHTML=`<h1>${data[i].title}</h1>
-                    <p>${data[i].content}</p>`
-   newsBox.appendChild(div)
+    const div = document.createElement('div')
+    div.classList.add('news')
+    div.innerHTML=`<h1>${data[i].title}</h1>
+                     <div class="content">${data[i].content}</div>`
+    newsBox.appendChild(div)
+   }
+}
+const displayFull = (data)=>{
+  for(let i=0;i<data.length;i++){
+    const div = document.createElement('div')
+    div.classList.add('news')
+    div.innerHTML=`<h1>${data[i].title}</h1>
+                     <div class="content">${data[i].content}</div>`
+    newsBox.appendChild(div)
+   }
+}
+category.forEach(ele=>{
+  ele.addEventListener('click',(e)=>{
+    e.stopPropagation();
+    if(e.target.style.backgroundColor=="black" && e.target.textContent!='All'){
+      if(e.target.textContent=="Sport")sports=0;
+      if(e.target.textContent=="Politics")politics=0;
+      if(e.target.textContent=="Entertainment")entertainment=0;
+      if(e.target.textContent=="Business")business=0;
+      if(!sports && !entertainment && !politics && !business){
+        all=1;
+        category[0].style.cssText = "background-color:black; color:white;"; 
+      }
+       e.target.style.cssText = "background-color:#f5f5f5; color:black;";
+    }
+    else if(e.target.textContent!="All"){
+      all = 0;
+      if(e.target.textContent=="Sport")sports=1;
+      if(e.target.textContent=="Politics")politics=1;
+      if(e.target.textContent=="Entertainment")entertainment=1;
+      if(e.target.textContent=="Business")business=1;
+      e.target.style.cssText = "background-color:black; color:white;";
+      category[0].style.cssText = "background-color:#f5f5f5; color:black;";
+      if(business && entertainment && sports && politics){
+        sports = 0;
+        business = 0;
+        entertainment = 0;
+        politics = 0;
+        all = 1;
+        category[0].style.cssText = "background-color:black; color:white;";
+        category.forEach(ele=>{if(ele.textContent!="All"){ele.style.cssText = "background-color:#f5f5f5; color:black;"}})
+      }
+    }
+    else{
+      sports = 0;
+      business = 0;
+      entertainment = 0;
+      politics = 0;
+      all = 1;
+      e.target.style.cssText = "background-color:black; color:white;";
+      category.forEach(ele=>{if(ele.textContent!="All"){ele.style.cssText = "background-color:#f5f5f5; color:black;"}})
+    }
+   newsBox.innerHTML="";
+    if(all)display(data)
+      if(sports)display(data.filter(ele=>ele.category=="sport"))
+        if(entertainment)display(data.filter(ele=>ele.category=="entertainment"))
+          if(business)display(data.filter(ele=>ele.category=="business"))
+            if(politics)display(data.filter(ele=>ele.category=="politics"))  
+  })
+})
+btn.addEventListener('click',(e)=>{
+  e.stopPropagation();
+  newsBox.innerHTML=""
+  if(search.value){
+    if(btn.textContent=="Show More"){
+      displayFull(newArr)
+      btn.textContent = "Show Less"  
+    }
+    else {
+      display(newArr)
+      btn.textContent = "Show More"  
+    }
+  }
+  else{
+    if(btn.textContent=="Show More"){
+      if(all)displayFull(data)
+        if(sports)displayFull(data.filter(ele=>ele.category=="sport"))
+          if(entertainment)displayFull(data.filter(ele=>ele.category=="entertainment"))
+            if(business)displayFull(data.filter(ele=>ele.category=="business"))
+              if(politics)displayFull(data.filter(ele=>ele.category=="politics"))
+      btn.textContent = "Show Less"  
+    }
+    else {
+      if(all)display(data)
+        if(sports)display(data.filter(ele=>ele.category=="sport"))
+          if(entertainment)display(data.filter(ele=>ele.category=="entertainment"))
+            if(business)display(data.filter(ele=>ele.category=="business"))
+              if(politics)display(data.filter(ele=>ele.category=="politics"))
+      btn.textContent = "Show More"  
+    }
   }
 })
+const handleSearch = ()=>{
+  const arr = data.filter(ele=>{
+    if(ele.title.toLowerCase().includes(search.value.toLowerCase())){
+    return ele;
+    }
+  })
+     newArr = arr.map(ele=>{
+     const a = ele.title.toLowerCase().indexOf(search.value.toLowerCase())
+     const newEle = ele.title.slice(0,a)+"<span>"+ele.title.slice(a,a+search.value.length)+"</span>"+ele.title.slice(a+search.value.length);
+     return {title:newEle,
+      content:ele.content
+     };
+  })
+  newsBox.innerHTML = ""
+  display(newArr)
+}
+const debouncedSearch = debounce(handleSearch, 300);
+search.addEventListener('input',(e)=>{
+  e.stopPropagation();
+  debouncedSearch()
+})
 
-  
+function debounce(func, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => func.apply(this, args), delay);
+  };
+}
